@@ -33,10 +33,13 @@ function decideRecomendacion() {
 	//TODO falta distancia mayor a normal , proyección
 
 	var candidatos = determinaFueraPoligonos(obtenPoligonosEcoPark(), ecobicisEnCirculo);
-	console.log('candidatos');
+	console.log(candidatos);
 
 	//TODO si candidatos es vacio obliga a punto más cercano auqneu este en parkímetro
 	ecobiciMasCercanaOrigena();
+	activeRoute.push(calcularRuta(markadorOrigen.position,markadorEcoBiciInicio.position,"car"));
+	activeRoute.push(calcularRuta(markadorEcoBiciInicio.position,markadorEcoBiciFin.position,"bicycle"));
+	activeRoute.push(calcularRuta(markadorEcoBiciFin.position,markadorDestino.position,"walk"));
 
 }
 
@@ -61,9 +64,7 @@ function ecobiciMasCercanaOrigena() {
 	markadorEcoBiciFin.setPosition(new google.maps.LatLng(ebDestino.lat, ebDestino.lng));
 	markadorEcoBiciFin.setMap(map);
 
-	activeRoute.push(calcularRuta(markadorOrigen.position,markadorEcoBiciInicio.position,"car"));
-	activeRoute.push(calcularRuta(markadorEcoBiciInicio.position,markadorEcoBiciFin.position,"bicycle"));
-	activeRoute.push(calcularRuta(markadorEcoBiciFin.position,markadorDestino.position,"walk"));
+
 
 
 }
@@ -87,11 +88,14 @@ function ecobiciMasCercanaOrigen(puntos) {
 	markadorEcoBiciFin.setMap(map);
 
 
+
+
 }
 
 function determinaFueraPoligonos(poligons, points) {
 	var result = [];
 	var adentro = false;
+	var cuentaAdentro=0;
 	for (var i = 0; i < points.length; i++) {
 		adentro = false;
 		for (var j = 0; j < poligons.length; j++) {
@@ -101,7 +105,7 @@ function determinaFueraPoligonos(poligons, points) {
 			}
 		}
 		if (!adentro) {
-			result.push(points[j]);
+			result[cuentaAdentro]=(points[j]);
 		}
 	}
 	//console.log(result);
@@ -149,6 +153,7 @@ function calcularRuta(start,end,type) {
 	directionsService.route(request, function(result, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
 			directionsDisplay2.setDirections(result);
+			
 		}
 	});
 	return directionsDisplay2;
