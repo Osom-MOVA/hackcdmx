@@ -1,4 +1,4 @@
-var distanciaKMenBici = 1.2;
+var distanciaKMenBici = .5;
 var tipoTransporte={
 	walk: {color:"#26ACDD",icono:"",mode:"WALKING"},
 	bicycle:{color:"#97C855",icono:"",mode:"WALKING"},
@@ -47,7 +47,7 @@ function decideRecomendacion() {
 	//TODO falta distancia mayor a normal , proyección
 
 	var candidatos = determinaFueraPoligonos(obtenPoligonosEcoPark(), ecobicisEnCirculo);
-	console.log(candidatos);
+	
 
 	//TODO si candidatos es vacio obliga a punto más cercano auqneu este en parkímetro
 	ecobiciMasCercanaOrigen(candidatos);
@@ -85,6 +85,7 @@ function ecobiciMasCercanaOrigena() {
 
 function ecobiciMasCercanaOrigen(puntos) {
 	console.log('ecobiciMasCercanaOrigen Con PUNTOS');
+	console.log(puntos);
 	var puntoOrigen = {
 		lat: markadorOrigen.getPosition().lat(),
 		lng: markadorOrigen.getPosition().lng()
@@ -110,30 +111,41 @@ function determinaFueraPoligonos(poligons, points) {
 	var result = [];
 	var adentro = false;
 	var cuentaAdentro=0;
+
 	for (var i = 0; i < points.length; i++) {
 		adentro = false;
 		for (var j = 0; j < poligons.length; j++) {
-
-			if (isPointInPoly(poligons[j], points[i])) {
+			var veamos= isPointInPoly(poligons[j], points[i]);
+			console.log(veamos);
+			if (veamos) {
+				
 				adentro = true;
-				cuentaAdentro
 			}
 		}
 		if (!adentro) {
-			result[cuentaAdentro]=(points[j]);
+			result.push((points[i]));
 		}
 	}
-	//console.log(result);
+	console.log(result);
 	return result;
 }
 
 function obtenPoligonosEcoPark() {
+
 	var result = [];
+	var poligonos=[];
 	for (var i = 0; i < poligonosEcoPark.features.length; i++) {
-		result.push({lng:poligonosEcoPark.features[i].geometry.coordinates[0][0][0],lat:poligonosEcoPark.features[i].geometry.coordinates[0][0][1]	});
+		result=[];
+		console.log(poligonosEcoPark.features[i].geometry.coordinates[0][0]);
+		for(var j= 0; j < poligonosEcoPark.features[i].geometry.coordinates[0][0].length; j++){
+
+			result.push({lat:poligonosEcoPark.features[i].geometry.coordinates[0][0][j][1],lng:poligonosEcoPark.features[i].geometry.coordinates[0][0][j][0]});
+		}
+		console.log(result);
+		poligonos.push(result);
 	}
-	console.log(result);
-	return result;
+	
+	return poligonos;
 }
 
 

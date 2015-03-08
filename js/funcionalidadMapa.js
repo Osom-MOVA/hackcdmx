@@ -81,11 +81,12 @@ function dibujaInfoboxBotones(location) {
 			}, function(results, status) {
 				resuelveDeocder(results, status, location, 'destino')
 			});
+			//obtenPoligonosEcoPark();
 			infowindowOrigenDestino.close();
 
 
 			decideRecomendacion();
-			/*obtenPoligonos();*/
+			
 
 		};
 
