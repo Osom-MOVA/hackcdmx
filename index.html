@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="OSOM - Moava">
+	<link rel="stylesheet" href="css/principal.css">
+	<link rel="stylesheet" href="css/mapa.css">
+	<title>MOVA</title>
+</head>
+<body>
+	<div class="controles">
+		<div class="ruta">
+			<p>
+				Voy de <input type="origen" id="inputOrigen" class="direccion"> a  <input type="destino" id="inputDestino" class="direccion">  <button>SW</button>
+			</p>
+		</div>
+	</div>
+	<div id="map-canvas"></div>
+
+	<!-- Scripts MAPA -->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script src="js/administradorMapa.js"></script>
+	<script src="js/poligonosEcoPark.js"></script>
+	<script src="js/estacionesEcoBici.js"></script>
+	<script src="js/funcionalidadMapa.js"></script>
+	<script src="js/operacionesMapa.js"></script>
+	<script src="js/manejoDatosMapa.js"></script>
+</body>
+</html>
