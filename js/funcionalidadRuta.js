@@ -50,7 +50,7 @@ function decideRecomendacion() {
 	console.log(candidatos);
 
 	//TODO si candidatos es vacio obliga a punto más cercano auqneu este en parkímetro
-	ecobiciMasCercanaOrigena();
+	ecobiciMasCercanaOrigen(candidatos);
 	activeRoute.push(calcularRuta(markadorOrigen.position,markadorEcoBiciInicio.position,"car"));
 	activeRoute.push(calcularRuta(markadorEcoBiciInicio.position,markadorEcoBiciFin.position,"bicycle"));
 	activeRoute.push(calcularRuta(markadorEcoBiciFin.position,markadorDestino.position,"walk"));
