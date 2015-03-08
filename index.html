@@ -32,7 +32,7 @@
 								Voy de 
 							</div>
 							<div class="col-xs-9">
-								<input class="inputRuta"  type="origen" id="inputOrigen" class="direccion">
+								<input class="inputRuta"  type="origen" id="inputOrigen" class="direccion" onkeydown="colocarPinEnDireccion(this, 'origen')">
 							</div>
 							
 						</div>
@@ -41,11 +41,12 @@
 								a 
 							</div>
 							<div class="col-xs-9">
-								<input  class="inputRuta" type="destino" id="inputDestino" class="direccion"> 
+								<input  class="inputRuta" type="destino" id="inputDestino" class="direccion" onkeydown="colocarPinEnDireccion(this, 'destino')"> 
 							</div>
 						</div>
 						<div class="col-sm-2 col-xs-1 two columns">
-							<button>SW</button>
+							
+							<button onclick="decideRecomendacion()">IR</button>
 
 						</div>
 					</div>

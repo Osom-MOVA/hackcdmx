@@ -32,6 +32,23 @@ var markadorDestino = new google.maps.Marker({
 	icon: pinIconDestino
 });
 
+markadorDestino.addListener('position_changed', function() {
+	console.log('Posición Cambio');
+
+	/*if (hayRutaActualmente) {
+		obtenRutaMulti();
+	} else {
+		if (markadorOrigen.getMap() !== null) {
+			decideRecomendacion();
+
+		}else{
+			markadorOrigen.setMap(map);
+			decideRecomendacion();
+		}
+			decideRecomendacion();
+	}*/
+});
+
 //Capa de polígonos con parquímetro
 var ecoParkPoligonosKML = new google.maps.KmlLayer({
 	url: 'https://raw.githubusercontent.com/Almaguer/KML_Ecoparq/master/poligonoecoparqenoperacion.kml'
@@ -91,7 +108,6 @@ function dibujaInfoboxBotones(location) {
 			infowindowOrigenDestino.close();
 
 
-			decideRecomendacion();
 			/*obtenPoligonos();*/
 
 		};
@@ -157,4 +173,33 @@ function toggleParkimetros() {
 		ecoparks.setMap(null);
 	}
 
+}
+
+function colocarPinEnDireccion(elem, tipoSolicitud) {
+	if (event.keyCode == 13) {
+		alert(elem.value);
+		var address = elem.value;
+		geocoder.geocode({
+			'address': address
+		}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				if (tipoSolicitud == 'origen') {
+					resultadoOrigen = results;
+					markadorOrigen.setPosition(results[0].geometry.location);
+					markadorOrigen.setMap(map);
+
+				} else if (tipoSolicitud == 'destino') {
+					resultadosDestino = results;
+					markadorDestino.setPosition(results[0].geometry.location);
+					markadorDestino.setMap(map);
+				} else {
+					resultadosGeneral = results;
+				}
+				map.setCenter(results[0].geometry.location);
+
+			} else {
+				alert('Geocode was not successful for the following reason: ' + status);
+			}
+		});
+	}
 }

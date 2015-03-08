@@ -56,8 +56,9 @@ p{
 input.inputRuta{
 	/*min-width: 300px;*/
 	width: 80%;
+	color: black;
 }
-div.log img{
+div.logo img{
 	width: 13%;
 	left: 9%;
 	min-width: 150px;

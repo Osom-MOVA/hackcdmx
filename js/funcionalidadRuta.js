@@ -1,25 +1,46 @@
 var distanciaKMenBici = 1.2;
-var tipoTransporte={
-	walk: {color:"#26ACDD",icono:"",mode:"WALKING"},
-	bicycle:{color:"#97C855",icono:"",mode:"WALKING"},
-	car:{color:"#253B86",icono:"",mode:"DRIVING"},
-	metro:{color:"#FD7E1D",icono:"",mode:"DRIVING"},
-	publicTrans:{color:"#EBE8E0",icono:"",mode:"DRIVING"}
+var hayRutaActualmente = false;
+var tipoTransporte = {
+	walk: {
+		color: "#26ACDD",
+		icono: "",
+		mode: "WALKING"
+	},
+	bicycle: {
+		color: "#97C855",
+		icono: "",
+		mode: "WALKING"
+	},
+	car: {
+		color: "#253B86",
+		icono: "",
+		mode: "DRIVING"
+	},
+	metro: {
+		color: "#FD7E1D",
+		icono: "",
+		mode: "DRIVING"
+	},
+	publicTrans: {
+		color: "#EBE8E0",
+		icono: "",
+		mode: "DRIVING"
+	}
 };
 
 var pinIconOrigenBici = new google.maps.MarkerImage(
-    "img/x_BICI%20ON.png",
-    null, /* size is determined at runtime */
-    null, /* origin is 0,0 */
-    null, /* anchor is bottom center of the scaled image */
-    new google.maps.Size(42, 42)
+	"img/x_BICI%20ON.png",
+	null, /* size is determined at runtime */
+	null, /* origin is 0,0 */
+	null, /* anchor is bottom center of the scaled image */
+	new google.maps.Size(42, 42)
 );
-var pinIconDestinoBici= new google.maps.MarkerImage(
-    "img/x_PEATON%20ON.png",
-    null, /* size is determined at runtime */
-    null, /* origin is 0,0 */
-    null, /* anchor is bottom center of the scaled image */
-    new google.maps.Size(42, 42)
+var pinIconDestinoBici = new google.maps.MarkerImage(
+	"img/x_PEATON%20ON.png",
+	null, /* size is determined at runtime */
+	null, /* origin is 0,0 */
+	null, /* anchor is bottom center of the scaled image */
+	new google.maps.Size(42, 42)
 );
 var markadorEcoBiciInicio = new google.maps.Marker({
 	map: null,
@@ -34,7 +55,16 @@ var markadorEcoBiciFin = new google.maps.Marker({
 	icon: pinIconDestinoBici
 });
 
+markadorEcoBiciInicio.addListener('dragend', function() {
+	console.log('Posición Cambio');
+	if (hayRutaActualmente) {
+		obtenRutaMulti();
+	}
+});
+
+
 function decideRecomendacion() {
+
 	console.log('Decide recomendación...');
 	var lat = markadorDestino.getPosition().lat();
 	var lng = markadorDestino.getPosition().lng();
@@ -50,11 +80,19 @@ function decideRecomendacion() {
 	console.log(candidatos);
 
 	//TODO si candidatos es vacio obliga a punto más cercano auqneu este en parkímetro
-	ecobiciMasCercanaOrigen(candidatos);
-	activeRoute.push(calcularRuta(markadorOrigen.position,markadorEcoBiciInicio.position,"car"));
-	activeRoute.push(calcularRuta(markadorEcoBiciInicio.position,markadorEcoBiciFin.position,"bicycle"));
-	activeRoute.push(calcularRuta(markadorEcoBiciFin.position,markadorDestino.position,"walk"));
 
+	ecobiciMasCercanaOrigena();
+
+
+	obtenRutaMulti();
+
+	hayRutaActualmente = true; //Para saber que hay una ruta y poder actualizar sin preguntar por todos los puntos
+}
+
+function obtenRutaMulti() {
+	activeRoute.push(calcularRuta(markadorOrigen.position, markadorEcoBiciInicio.position, "car"));
+	activeRoute.push(calcularRuta(markadorEcoBiciInicio.position, markadorEcoBiciFin.position, "bicycle"));
+	activeRoute.push(calcularRuta(markadorEcoBiciFin.position, markadorDestino.position, "walk"));
 }
 
 function ecobiciMasCercanaOrigena() {
@@ -80,7 +118,6 @@ function ecobiciMasCercanaOrigena() {
 
 
 
-
 }
 
 function ecobiciMasCercanaOrigen(puntos) {
@@ -103,13 +140,12 @@ function ecobiciMasCercanaOrigen(puntos) {
 
 
 
-
 }
 
 function determinaFueraPoligonos(poligons, points) {
 	var result = [];
 	var adentro = false;
-	var cuentaAdentro=0;
+	var cuentaAdentro = 0;
 	for (var i = 0; i < points.length; i++) {
 		adentro = false;
 		for (var j = 0; j < poligons.length; j++) {
@@ -119,7 +155,7 @@ function determinaFueraPoligonos(poligons, points) {
 			}
 		}
 		if (!adentro) {
-			result[cuentaAdentro]=(points[j]);
+			result[cuentaAdentro] = (points[j]);
 		}
 	}
 	//console.log(result);
@@ -136,10 +172,9 @@ function obtenPoligonosEcoPark() {
 
 
 
-
-function calcularRuta(start,end,type) {
+function calcularRuta(start, end, type) {
 	console.log('Calculando ruta...')
-	var datos=tipoTransporte[type];
+	var datos = tipoTransporte[type];
 	/*var waypts = [];
 	waypts.push({
 		location: new google.maps.LatLng(19.406048, -99.168616),
@@ -158,7 +193,10 @@ function calcularRuta(start,end,type) {
 	var rendererOptions2 = {
 		draggable: true,
 		suppressMarkers: true,
-		polylineOptions: { strokeColor: datos.color } 
+		polylineOptions: {
+			strokeColor: datos.color
+		},
+		preserveViewport: true
 	};
 
 	var directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions2);
@@ -167,7 +205,7 @@ function calcularRuta(start,end,type) {
 	directionsService.route(request, function(result, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
 			directionsDisplay2.setDirections(result);
-			
+
 		}
 	});
 	return directionsDisplay2;
