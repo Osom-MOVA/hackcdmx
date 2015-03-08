@@ -79,7 +79,7 @@ function dibujaInfoboxBotones(location) {
 			markadorDestino.setPosition(location);
 			markadorDestino.setMap(map);
 			if (markadorOrigen.map == null) {
-				markadorOrigen.setMap(map);
+				markadorOrigen.setMap(map); //
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(successGeoLoc, errorGeoLoc);
 				} else {
