@@ -129,10 +129,10 @@ var ecoParkVisible = false;
 function toggleParkimetros() {
 	console.log('toggleParkimetros');
 	ecoParkVisible = !ecoParkVisible;
-	if (ecoBiciVisible) {
-		ecoParkPoligonosKML.setMap(map);
+	if (ecoParkVisible) {
+		ecoparks.setMap(map);
 	} else {
-		ecoParkPoligonosKML.setMap(null);
+		ecoparks.setMap(null);
 	}
 
 }

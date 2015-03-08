@@ -5,6 +5,7 @@ var directionsService = new google.maps.DirectionsService();
 var rendererOptions = {
 	// draggable: true
 };
+var ecoparks = new google.maps.Data();
 //-----------------------Se inicializa el mapa de google con sus parametros
 function initialize() {
 	geocoder = new google.maps.Geocoder();
@@ -26,10 +27,24 @@ function initialize() {
 		dibujaInfoboxBotones(e.latLng);
 	});
 
-		toggleParkimetros();
+	
+	ecoparks.loadGeoJson('datos/ecopark.json');
+
+	//toggleParkimetros();
+	ecoparks.setStyle({
+		//icon: '//example.com/path/to/image.png',
+		fillColor: '#818DBE',
+		fillOpacity: 0.35,
+		strokeColor: '#565E7F',
+		strokeWeight: 3
+	});
+
+	ecoparks.addListener('click', function(e) {
+		console.log(e.latLng);
+		dibujaInfoboxBotones(e.latLng);
+	});
 
 	
-
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
