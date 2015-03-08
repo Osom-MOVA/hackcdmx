@@ -76,7 +76,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 
 function closestPoint(arrayPoints, p) {
   var result;
-  console.log(arrayPoints);
+  //onsole.log(arrayPoints);
   var min = distance(p.lat, p.lng, arrayPoints[0].lat, arrayPoints[0].lng);
   var dist;
   var result;

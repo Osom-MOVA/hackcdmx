@@ -74,14 +74,7 @@ function dibujaInfoboxBotones(location) {
 					resuelveDeocder(results, status, markadorOrigen.getPosition(), 'origen')
 				});
 			}
-			console.log(activeRoute);
-			if (activeRoute.length > 0) {
-
-				for (var i = 0; i < activeRoute.length; i++) {
-					activeRoute[i].setMap(null);
-				}
-				activeRoute = [];
-			}
+			wipeRoute();
 
 			geocoder.geocode({
 				'latLng': location

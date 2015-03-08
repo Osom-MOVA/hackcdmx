@@ -116,6 +116,7 @@ function determinaFueraPoligonos(poligons, points) {
 
 			if (isPointInPoly(poligons[j], points[i])) {
 				adentro = true;
+				cuentaAdentro
 			}
 		}
 		if (!adentro) {
@@ -129,8 +130,9 @@ function determinaFueraPoligonos(poligons, points) {
 function obtenPoligonosEcoPark() {
 	var result = [];
 	for (var i = 0; i < poligonosEcoPark.features.length; i++) {
-		result.push(poligonosEcoPark.features[i].geometry.coordinates[0][0]);
+		result.push({lng:poligonosEcoPark.features[i].geometry.coordinates[0][0][0],lat:poligonosEcoPark.features[i].geometry.coordinates[0][0][1]	});
 	}
+	console.log(result);
 	return result;
 }
 
@@ -172,3 +174,13 @@ function calcularRuta(start,end,type) {
 	});
 	return directionsDisplay2;
 }
+//-----------------------------------active route es el que borra  las rutas		
+function wipeRoute(){	
+			if (activeRoute.length > 0) {
+
+				for (var i = 0; i < activeRoute.length; i++) {
+					activeRoute[i].setMap(null);
+				}
+				activeRoute = [];
+			}
+		}
