@@ -4,7 +4,15 @@ var circle = {
 	path: google.maps.SymbolPath.CIRCLE,
 	fillColor: 'green',
 	fillOpacity: 1,
-	scale: 2,
+	scale: 3,
+	strokeColor: 'white',
+	strokeWeight: 1
+};
+var circleOrange = {
+	path: google.maps.SymbolPath.CIRCLE,
+	fillColor: 'orange',
+	fillOpacity: 1,
+	scale: 4,
 	strokeColor: 'white',
 	strokeWeight: 1
 };
@@ -12,7 +20,7 @@ var circleRed = {
 	path: google.maps.SymbolPath.CIRCLE,
 	fillColor: 'red',
 	fillOpacity: 1,
-	scale: 3,
+	scale: 4,
 	strokeColor: 'white',
 	strokeWeight: 1
 };
@@ -53,3 +61,23 @@ for (var i = 0; i < ecobici.length; i++) {
 	});
 	markadorEcoBici.push(aux);
 }
+
+var metroPoints = [];
+var markadorMetro = [];
+for (var i = 0; i < metroArr.length; i++) {
+	var lat = parseFloat(metroArr[i].LATITUDE);
+	var lng = parseFloat(metroArr[i].LONGITUDE);
+	metroPoints.push({
+		lat: lat,
+		lng: lng
+	});
+
+	// Crea marcadores invisibles para no contaminar visualmente
+	var aux = new google.maps.Marker({
+		position: new google.maps.LatLng(lat, lng),
+		map: null, //Si se le inserta el mapa map le va a valer verga
+		icon: circleOrange
+	});
+	markadorMetro.push(aux);
+}
+

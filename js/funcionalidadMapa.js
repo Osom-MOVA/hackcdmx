@@ -147,7 +147,6 @@ function errorGeoLoc(msg) {
 }
 
 var ecoBiciVisible = false;
-
 function toggleEcoBici() {
 	console.log('toggleEcoBici');
 	ecoBiciVisible = !ecoBiciVisible;
@@ -160,6 +159,22 @@ function toggleEcoBici() {
 			markadorEcoBici[i].setMap(null);
 		};
 	}
+}
+
+var metroVisible = false;
+function toggleMetro() {
+	console.log('toggleMetro');
+	metroVisible = !metroVisible;
+	if (metroVisible) {
+		for (var i = markadorMetro.length - 1; i >= 0; i--) {
+			markadorMetro[i].setMap(map);
+		};
+	} else {
+		for (var i = markadorMetro.length - 1; i >= 0; i--) {
+			markadorMetro[i].setMap(null);
+		};
+	}
+	//metroArr
 }
 
 var ecoParkVisible = false;

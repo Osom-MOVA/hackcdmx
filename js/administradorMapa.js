@@ -33,10 +33,10 @@ function initialize() {
 	//toggleParkimetros();
 	ecoparks.setStyle({
 		//icon: '//example.com/path/to/image.png',
-		fillColor: '#818DBE',
+		fillColor: '#B0B8DB',
 		fillOpacity: 0.35,
-		strokeColor: '#565E7F',
-		strokeWeight: 3
+		strokeColor: '#DCE0F2',
+		strokeWeight: 1
 	});
 
 	ecoparks.addListener('click', function(e) {
@@ -59,6 +59,8 @@ function muestraElemento(elem, categoria, c) {
 		toggleEcoBici();
 	} else if (categoria === 'ecopark') {
 		toggleParkimetros();
+	} else if( categoria==='metro'){
+		toggleMetro();
 	}
 
 }
