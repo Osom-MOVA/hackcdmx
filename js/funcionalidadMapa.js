@@ -1,15 +1,35 @@
 var resultadoOrigen, resultadosDestino, resultadosGeneral;
-var activeRoute=[];
+
+
+var pinIconOrigen = new google.maps.MarkerImage(
+	"img/x_ORIGEN.png",
+	null, /* size is determined at runtime */
+	null, /* origin is 0,0 */
+	null, /* anchor is bottom center of the scaled image */
+	new google.maps.Size(42, 42)
+);
+var pinIconDestino = new google.maps.MarkerImage(
+	"img/x_DESTINO.png",
+	null, /* size is determined at runtime */
+	null, /* origin is 0,0 */
+	null, /* anchor is bottom center of the scaled image */
+	new google.maps.Size(42, 42)
+);
+
+var activeRoute = [];
+
 
 var markadorOrigen = new google.maps.Marker({
 	map: null,
 	position: new google.maps.LatLng(19.396546, -99.140507),
+	icon: pinIconOrigen
 });
 
 var markadorDestino = new google.maps.Marker({
 	map: null,
 	position: new google.maps.LatLng(19.396546, -99.140507),
-	draggable: true
+	draggable: true,
+	icon: pinIconDestino
 });
 
 //Capa de polígonos con parquímetro
@@ -55,12 +75,12 @@ function dibujaInfoboxBotones(location) {
 				});
 			}
 			console.log(activeRoute);
-			if(activeRoute.length>0){
+			if (activeRoute.length > 0) {
 
-				for(var i=0;i<activeRoute.length;i++){
+				for (var i = 0; i < activeRoute.length; i++) {
 					activeRoute[i].setMap(null);
 				}
-				activeRoute=[];
+				activeRoute = [];
 			}
 
 			geocoder.geocode({
@@ -70,7 +90,7 @@ function dibujaInfoboxBotones(location) {
 			});
 			infowindowOrigenDestino.close();
 
-			
+
 			decideRecomendacion();
 			/*obtenPoligonos();*/
 
@@ -111,6 +131,7 @@ function errorGeoLoc(msg) {
 }
 
 var ecoBiciVisible = false;
+
 function toggleEcoBici() {
 	console.log('toggleEcoBici');
 	ecoBiciVisible = !ecoBiciVisible;
@@ -126,6 +147,7 @@ function toggleEcoBici() {
 }
 
 var ecoParkVisible = false;
+
 function toggleParkimetros() {
 	console.log('toggleParkimetros');
 	ecoParkVisible = !ecoParkVisible;

@@ -7,17 +7,31 @@ var tipoTransporte={
 	publicTrans:{color:"#EBE8E0",icono:"",mode:"DRIVING"}
 };
 
+var pinIconOrigenBici = new google.maps.MarkerImage(
+    "img/x_BICI%20ON.png",
+    null, /* size is determined at runtime */
+    null, /* origin is 0,0 */
+    null, /* anchor is bottom center of the scaled image */
+    new google.maps.Size(42, 42)
+);
+var pinIconDestinoBici= new google.maps.MarkerImage(
+    "img/x_PEATON%20ON.png",
+    null, /* size is determined at runtime */
+    null, /* origin is 0,0 */
+    null, /* anchor is bottom center of the scaled image */
+    new google.maps.Size(42, 42)
+);
 var markadorEcoBiciInicio = new google.maps.Marker({
 	map: null,
 	position: new google.maps.LatLng(19.396546, -99.140507),
 	draggable: true,
-	//icon: circleRed
+	icon: pinIconOrigenBici
 });
 
 var markadorEcoBiciFin = new google.maps.Marker({
 	map: null,
 	position: new google.maps.LatLng(19.396546, -99.140507),
-	icon: circleBlue
+	icon: pinIconDestinoBici
 });
 
 function decideRecomendacion() {

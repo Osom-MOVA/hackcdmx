@@ -28,7 +28,15 @@ p{
 .direccion{
 	width: 30%;
 }
-.contenedor-menu{ background-color: white}
+.contenedor-menu{ 
+	display: inline-block;
+	width: 92%;
+	background-color: white;
+}
+.contenedor-menu img {
+	min-width: 35px;
+}
+
 /*#menu-transporte img{ position: absolute;}*/
 .menu-layouts{
 	position: absolute;
@@ -37,8 +45,22 @@ p{
 	/*width: 40px;*/
 	background-color: white;
 }
-#lista-layouts{
+.lista-layouts{
 	max-width: 40px;
-	list-style: unstyled;
+	list-style: none;
+}
+.lista-layouts img{ 
+	max-width: 40px;
+}
 
+input.inputRuta{
+	/*min-width: 300px;*/
+	width: 80%;
+}
+div.log img{
+	width: 13%;
+	left: 9%;
+	min-width: 150px;
+	position: absolute;
+	top: 96%;
 }

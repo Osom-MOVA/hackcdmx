@@ -10,25 +10,41 @@
 
 	<!-- We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
 	However, there is a blank style.css in the css directory should you prefer -->
-	<link rel="stylesheet" href="css/gumby.css">
+	<!-- <link rel="stylesheet" href="css/gumby.css"> -->
 	<!-- <link rel="stylesheet" href="css/style.css"> -->
 	<!-- <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'> -->
 	<!-- /**/<script src="js/libs/modernizr-2.6.2.min.js"></script> -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 </head>
 <body>
-	<div class="controles">
+	
+	<div class="container-fluid controles">
 		<div class="row">
-			<div class="ten columns">
+			<div class="col-sm-10 columns">
 				<div class="ruta">
 
 					<div class="row">
-						<div class="five columns">
-							Voy de <input class="input"  type="origen" id="inputOrigen" class="direccion">
+						<div class="col-sm-5 five columns">
+							<div class="col-xs-3">
+								Voy de 
+							</div>
+							<div class="col-xs-9">
+								<input class="inputRuta"  type="origen" id="inputOrigen" class="direccion">
+							</div>
+							
 						</div>
-						<div class="five columns">
-							a  <input  class="input" type="destino" id="inputDestino" class="direccion"> 
+						<div class=" col-sm-5 col-xs-11 five columns">
+							<div class="col-xs-3">
+								a 
+							</div>
+							<div class="col-xs-9">
+								<input  class="inputRuta" type="destino" id="inputDestino" class="direccion"> 
+							</div>
 						</div>
-						<div class="two columns">
+						<div class="col-sm-2 col-xs-1 two columns">
 							<button>SW</button>
 
 						</div>
@@ -36,26 +52,26 @@
 					
 				</div>
 			</div>
-			<div class="two columns">
-				
+			<div class="col-sm-2 col-sm-offset-0 col-xs-6 col-xs-offset-1 columns">
+
 				<div id="menu-transporte">
 					<div class="row">
 						<div class="contenedor-menu">
 							
-							<div class="columns two">
-								<img src="img/x_BICI%20ON.png" alt="">
+							<div class="columns col-xs-2">
+								<img class="img-responsive" src="img/x_BICI%20ON.png" alt="">
 							</div>
-							<div class="columns two">
-								<img src="img/x_PEATON%20ON.png" alt="">
+							<div class="columns col-xs-2">
+								<img class="img-responsive" src="img/x_PEATON%20ON.png" alt="">
 							</div>
-							<div class="columns two">
-								<img src="img/x_COCHE%20ON.png" alt="">
+							<div class="columns col-xs-2">
+								<img class="img-responsive" src="img/x_COCHE%20ON.png" alt="">
 							</div>
-							<div class="columns two">
-								<img src="img/x_METRO%20ON.png" alt="">
+							<div class="columns col-xs-2">
+								<img class="img-responsive" src="img/x_METRO%20ON.png" alt="">
 							</div>
-							<div class="columns two">
-								<img src="img/x_BUS%20ON.png" alt="">
+							<div class="columns col-xs-2">
+								<img class="img-responsive" src="img/x_BUS%20ON.png" alt="">
 							</div>
 						</div>
 
@@ -65,15 +81,19 @@
 			</div>
 		</div>
 		<div class="menu-layouts">
-			<ul id="lista-layouts">
-				<li><img src="img/x_OJO.png" alt=""></li>
+			<ul class="lista-layouts list-unstyled">
+				<li><img class="img-responsive" src="img/x_OJO.png" alt=""></li>
 				<li></li>
-				<li><img src="img/x_BICI%20VISTA%20OFF.png" alt="ecobici" onclick="muestraElemento(this,'ecobici')"></li>
-				<li><img src="img/x_PARK VISTA OFF.png" alt="ecopark" onclick="muestraElemento(this,'ecopark')"></li>
-				<li><img src="img/x_METRO VISTA OFF.png" alt="metro"></li>
-				<li><img src="img/x_BUS VISTA OFF.png" alt="bus"></li>
+				<li><img class="img-responsive" src="img/x_BICI%20VISTA%20OFF.png" alt="ecobici" onclick="muestraElemento(this,'ecobici')"></li>
+				<li><img class="img-responsive" src="img/x_PARK VISTA OFF.png" alt="ecopark" onclick="muestraElemento(this,'ecopark')"></li>
+				<li><img class="img-responsive" src="img/x_METRO VISTA OFF.png" alt="metro"></li>
+				<li><img class="img-responsive" src="img/x_BUS VISTA OFF.png" alt="bus"></li>
 
 			</ul>
+
+		</div>
+		<div class="logo">
+			<img src="img/X_LOGO%20MOVA.png" alt="">
 		</div>
 	</div>
 	<div id="map-canvas"></div>
