@@ -5,6 +5,8 @@ function Point(latitud, longitud) {
 
 
 function isPointInPoly(poly, pt) {
+  console.log(poly);
+  console.log(pt);
   for (var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
 
     ((poly[i].lat <= pt.lat && pt.lat < poly[j].lat) || (poly[j].lat <= pt.lat && pt.lat < poly[i].lat)) && (pt.lng < (poly[j].lng - poly[i].lng) * (pt.lat - poly[i].lat) / (poly[j].lat - poly[i].lat) + poly[i].lng) && (c = !c);
@@ -76,7 +78,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 
 function closestPoint(arrayPoints, p) {
   var result;
-  console.log(arrayPoints);
+  //onsole.log(arrayPoints);
   var min = distance(p.lat, p.lng, arrayPoints[0].lat, arrayPoints[0].lng);
   var dist;
   var result;
@@ -91,7 +93,7 @@ function closestPoint(arrayPoints, p) {
   return result;
 }
 
-function calcClosest() {
+function inPoly(i,j) {
 
   var points = [{
     lat: 0,
@@ -100,7 +102,7 @@ function calcClosest() {
     lat: 0,
     lng: 50
   }, {
-    lat: 50,
+    lat: 5,
     lng: 10
   }, {
     lat: -50,
@@ -112,7 +114,7 @@ function calcClosest() {
     lat: 0,
     lng: 0
   }];
-
+ var muestra=isPointInPoly(points,{lat:i,lng:j})
 
   console.log(muestra);
 }
