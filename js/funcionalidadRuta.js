@@ -1,3 +1,4 @@
+
 var distanciaKMenBici = 1.2;
 var hayRutaActualmente = false;
 var tipoTransporte = {
@@ -76,15 +77,24 @@ function decideRecomendacion() {
 
 	//TODO falta distancia mayor a normal , proyección
 
+	
+	
+	if(ecobicisEnCirculo.length==0){
+		obtenRutaSimple();
+	}
+	else{
 	var candidatos = determinaFueraPoligonos(obtenPoligonosEcoPark(), ecobicisEnCirculo);
-	console.log(candidatos);
-
+	if(candidatos.length==0){
 	//TODO si candidatos es vacio obliga a punto más cercano auqneu este en parkímetro
+			candidatos=ecobicisEnCirculo;
 
-	ecobiciMasCercanaOrigena();
+		}
+			ecobiciMasCercanaOrigen(candidatos);
+			obtenRutaMulti();
+	}
+	
 
-
-	obtenRutaMulti();
+	
 
 	hayRutaActualmente = true; //Para saber que hay una ruta y poder actualizar sin preguntar por todos los puntos
 }
@@ -94,6 +104,10 @@ function obtenRutaMulti() {
 	activeRoute.push(calcularRuta(markadorOrigen.position, markadorEcoBiciInicio.position, "car"));
 	activeRoute.push(calcularRuta(markadorEcoBiciInicio.position, markadorEcoBiciFin.position, "bicycle"));
 	activeRoute.push(calcularRuta(markadorEcoBiciFin.position, markadorDestino.position, "walk"));
+}
+
+function obtenRutaSimple(){
+	activeRoute.push(calcularRuta(markadorOrigen.position, markadorDestino.position, "car"));
 }
 
 function ecobiciMasCercanaOrigena() {
@@ -123,6 +137,7 @@ function ecobiciMasCercanaOrigena() {
 
 function ecobiciMasCercanaOrigen(puntos) {
 	console.log('ecobiciMasCercanaOrigen Con PUNTOS');
+	console.log(puntos);
 	var puntoOrigen = {
 		lat: markadorOrigen.getPosition().lat(),
 		lng: markadorOrigen.getPosition().lng()
@@ -146,29 +161,44 @@ function ecobiciMasCercanaOrigen(puntos) {
 function determinaFueraPoligonos(poligons, points) {
 	var result = [];
 	var adentro = false;
-	var cuentaAdentro = 0;
+
+	var cuentaAdentro=0;
+
 	for (var i = 0; i < points.length; i++) {
 		adentro = false;
 		for (var j = 0; j < poligons.length; j++) {
-
-			if (isPointInPoly(poligons[j], points[i])) {
+			var veamos= isPointInPoly(poligons[j], points[i]);
+			console.log(veamos);
+			if (veamos) {
+				
 				adentro = true;
 			}
 		}
 		if (!adentro) {
-			result[cuentaAdentro] = (points[j]);
+			result.push((points[i]));
+
 		}
 	}
-	//console.log(result);
+	console.log(result);
 	return result;
 }
 
 function obtenPoligonosEcoPark() {
+
 	var result = [];
+	var poligonos=[];
 	for (var i = 0; i < poligonosEcoPark.features.length; i++) {
-		result.push(poligonosEcoPark.features[i].geometry.coordinates[0][0]);
+		result=[];
+		console.log(poligonosEcoPark.features[i].geometry.coordinates[0][0]);
+		for(var j= 0; j < poligonosEcoPark.features[i].geometry.coordinates[0][0].length; j++){
+
+			result.push({lat:poligonosEcoPark.features[i].geometry.coordinates[0][0][j][1],lng:poligonosEcoPark.features[i].geometry.coordinates[0][0][j][0]});
+		}
+		console.log(result);
+		poligonos.push(result);
 	}
-	return result;
+	
+	return poligonos;
 }
 
 
@@ -212,12 +242,13 @@ function calcularRuta(start, end, type) {
 	return directionsDisplay2;
 }
 
-function wipeRoute() {
-	if (activeRoute.length > 0) {
+//-----------------------------------active route es el que borra  las rutas		
+function wipeRoute(){	
+			if (activeRoute.length > 0) {
 
-		for (var i = 0; i < activeRoute.length; i++) {
-			activeRoute[i].setMap(null);
+				for (var i = 0; i < activeRoute.length; i++) {
+					activeRoute[i].setMap(null);
+				}
+				activeRoute = [];
+			}
 		}
-		activeRoute = [];
-	}
-}
