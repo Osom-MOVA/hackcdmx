@@ -1,15 +1,31 @@
 var resultadoOrigen, resultadosDestino, resultadosGeneral;
 
+var pinIconOrigen = new google.maps.MarkerImage(
+    "img/x_ORIGEN.png",
+    null, /* size is determined at runtime */
+    null, /* origin is 0,0 */
+    null, /* anchor is bottom center of the scaled image */
+    new google.maps.Size(42, 42)
+);
+var pinIconDestino= new google.maps.MarkerImage(
+    "img/x_DESTINO.png",
+    null, /* size is determined at runtime */
+    null, /* origin is 0,0 */
+    null, /* anchor is bottom center of the scaled image */
+    new google.maps.Size(42, 42)
+);
 
 var markadorOrigen = new google.maps.Marker({
 	map: null,
 	position: new google.maps.LatLng(19.396546, -99.140507),
+	icon: pinIconOrigen
 });
 
 var markadorDestino = new google.maps.Marker({
 	map: null,
 	position: new google.maps.LatLng(19.396546, -99.140507),
-	draggable: true
+	draggable: true,
+	icon: pinIconDestino
 });
 
 //Capa de polígonos con parquímetro
