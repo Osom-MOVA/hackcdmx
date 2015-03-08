@@ -1,19 +1,23 @@
 var resultadoOrigen, resultadosDestino, resultadosGeneral;
 
+
 var pinIconOrigen = new google.maps.MarkerImage(
-    "img/x_ORIGEN.png",
-    null, /* size is determined at runtime */
-    null, /* origin is 0,0 */
-    null, /* anchor is bottom center of the scaled image */
-    new google.maps.Size(42, 42)
+	"img/x_ORIGEN.png",
+	null, /* size is determined at runtime */
+	null, /* origin is 0,0 */
+	null, /* anchor is bottom center of the scaled image */
+	new google.maps.Size(42, 42)
 );
-var pinIconDestino= new google.maps.MarkerImage(
-    "img/x_DESTINO.png",
-    null, /* size is determined at runtime */
-    null, /* origin is 0,0 */
-    null, /* anchor is bottom center of the scaled image */
-    new google.maps.Size(42, 42)
+var pinIconDestino = new google.maps.MarkerImage(
+	"img/x_DESTINO.png",
+	null, /* size is determined at runtime */
+	null, /* origin is 0,0 */
+	null, /* anchor is bottom center of the scaled image */
+	new google.maps.Size(42, 42)
 );
+
+var activeRoute = [];
+
 
 var markadorOrigen = new google.maps.Marker({
 	map: null,
@@ -70,12 +74,22 @@ function dibujaInfoboxBotones(location) {
 					resuelveDeocder(results, status, markadorOrigen.getPosition(), 'origen')
 				});
 			}
+			console.log(activeRoute);
+			if (activeRoute.length > 0) {
+
+				for (var i = 0; i < activeRoute.length; i++) {
+					activeRoute[i].setMap(null);
+				}
+				activeRoute = [];
+			}
+
 			geocoder.geocode({
 				'latLng': location
 			}, function(results, status) {
 				resuelveDeocder(results, status, location, 'destino')
 			});
 			infowindowOrigenDestino.close();
+
 
 			decideRecomendacion();
 			/*obtenPoligonos();*/
@@ -117,6 +131,7 @@ function errorGeoLoc(msg) {
 }
 
 var ecoBiciVisible = false;
+
 function toggleEcoBici() {
 	console.log('toggleEcoBici');
 	ecoBiciVisible = !ecoBiciVisible;
@@ -132,6 +147,7 @@ function toggleEcoBici() {
 }
 
 var ecoParkVisible = false;
+
 function toggleParkimetros() {
 	console.log('toggleParkimetros');
 	ecoParkVisible = !ecoParkVisible;
