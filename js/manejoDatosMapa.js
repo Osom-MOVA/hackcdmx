@@ -30,7 +30,6 @@ var circleBlue = {
 // Obtiene la latitud y longitud de location en los objetos de ecobici ya que vienen en string "lat,lng"
 var ecobiciPoints = [];
 var markadorEcoBici = [];
-console.log(ecobici);
 for (var i = 0; i < ecobici.length; i++) {
 	var latlngStr = ecobici[i].location.split(",", 2);
 	var lat = parseFloat(latlngStr[0]);

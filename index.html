@@ -6,18 +6,79 @@
 	<link rel="stylesheet" href="css/principal.css">
 	<link rel="stylesheet" href="css/mapa.css">
 	<title>MOVA</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+	<!-- We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
+	However, there is a blank style.css in the css directory should you prefer -->
+	<link rel="stylesheet" href="css/gumby.css">
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'> -->
+	<!-- /**/<script src="js/libs/modernizr-2.6.2.min.js"></script> -->
 </head>
 <body>
 	<div class="controles">
-		<div class="ruta">
-			<p>
-				Voy de <input type="origen" id="inputOrigen" class="direccion"> a  <input type="destino" id="inputDestino" class="direccion">  <button>SW</button>
-			</p>
+		<div class="row">
+			<div class="ten columns">
+				<div class="ruta">
+
+					<div class="row">
+						<div class="five columns">
+							Voy de <input class="input"  type="origen" id="inputOrigen" class="direccion">
+						</div>
+						<div class="five columns">
+							a  <input  class="input" type="destino" id="inputDestino" class="direccion"> 
+						</div>
+						<div class="two columns">
+							<button>SW</button>
+
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="two columns">
+				
+				<div id="menu-transporte">
+					<div class="row">
+						<div class="contenedor-menu">
+							
+							<div class="columns two">
+								<img src="img/x_BICI%20ON.png" alt="">
+							</div>
+							<div class="columns two">
+								<img src="img/x_PEATON%20ON.png" alt="">
+							</div>
+							<div class="columns two">
+								<img src="img/x_COCHE%20ON.png" alt="">
+							</div>
+							<div class="columns two">
+								<img src="img/x_METRO%20ON.png" alt="">
+							</div>
+							<div class="columns two">
+								<img src="img/x_BUS%20ON.png" alt="">
+							</div>
+						</div>
+
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="menu-layouts">
+			<ul id="lista-layouts">
+				<li><img src="img/x_OJO.png" alt=""></li>
+				<li></li>
+				<li><img src="img/x_BICI%20VISTA%20OFF.png" alt="ecobici" onclick="muestraElemento(this,'ecobici')"></li>
+				<li><img src="img/x_PARK VISTA OFF.png" alt="ecopark" onclick="muestraElemento(this,'ecopark')"></li>
+				<li><img src="img/x_METRO VISTA OFF.png" alt="metro"></li>
+				<li><img src="img/x_BUS VISTA OFF.png" alt="bus"></li>
+
+			</ul>
 		</div>
 	</div>
 	<div id="map-canvas"></div>
 
-	<!-- Scripts MAPA -->
+	<!-- Scripts MAPA-->
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 	<script src="js/administradorMapa.js"></script>
 	<script src="js/poligonosEcoPark.js"></script>
@@ -25,6 +86,6 @@
 	<script src="js/manejoDatosMapa.js"></script>
 	<script src="js/funcionalidadMapa.js"></script>
 	<script src="js/funcionalidadRuta.js"></script>
-	<script src="js/operacionesMapa.js"></script>
+	<script src="js/operacionesMapa.js"></script> 
 </body>
 </html>

@@ -26,9 +26,24 @@ function initialize() {
 		dibujaInfoboxBotones(e.latLng);
 	});
 
-	toggleEcoBici();
-	toggleParkimetros();
+		toggleParkimetros();
+
+	
 
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+function muestraElemento(elem, categoria, c) {
+	elem.src = elem.src.replace('ON', 'aux');
+	elem.src = elem.src.replace('OFF', 'ON');
+	elem.src = elem.src.replace('aux', 'OFF');
+	console.log(elem);
+	console.log(categoria);
+	if (categoria === 'ecobici') {
+		toggleEcoBici();
+	} else if (categoria === 'ecopark') {
+		toggleParkimetros();
+	}
+
+}

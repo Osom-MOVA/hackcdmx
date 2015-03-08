@@ -5,6 +5,7 @@ html, body{
 	padding: 0px;
 	margin: 0px;
 	position: relative;
+	/*font-family: 'Quicksand', sans-serif !important;*/
 }
 
 div.controles{
@@ -15,13 +16,29 @@ div.controles{
 	width: 100%;
 }
 div.ruta{
-	background-color: black;
+	background-color: #818DBE;
 	padding: 5px 10px;
 	width: 100%;
+	/*height: 40px;*/
+	color: white;
 }
 p{
-	margin: 0px;
+	margin: 1px 5px;
 }
 .direccion{
 	width: 30%;
+}
+.contenedor-menu{ background-color: white}
+/*#menu-transporte img{ position: absolute;}*/
+.menu-layouts{
+	position: absolute;
+	left: 2.5%;
+	margin: 0;
+	max-width: 40px;
+	background-color: white;
+}
+#lista-layouts{
+	max-width: 40px;
+	list-style: unstyled;
+
 }
