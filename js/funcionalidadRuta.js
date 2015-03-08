@@ -1,4 +1,11 @@
 var distanciaKMenBici = 1.2;
+var tipoTransporte={
+	walk: {color:"#26ACDD",icono:"",mode:"WALKING"},
+	bicycle:{color:"#97C855",icono:"",mode:"WALKING"},
+	car:{color:"#253B86",icono:"",mode:"DRIVING"},
+	metro:{color:"#FD7E1D",icono:"",mode:"DRIVING"},
+	publicTrans:{color:"#EBE8E0",icono:"",mode:"DRIVING"}
+};
 
 var markadorEcoBiciInicio = new google.maps.Marker({
 	map: null,
@@ -29,11 +36,11 @@ function decideRecomendacion() {
 	console.log('candidatos');
 
 	//TODO si candidatos es vacio obliga a punto más cercano auqneu este en parkímetro
-	ecobiciMasCercanaOrigen(candidatos);
+	ecobiciMasCercanaOrigena();
 
 }
 
-function ecobiciMasCercanaOrigen() {
+function ecobiciMasCercanaOrigena() {
 	console.log('ecobiciMasCercanaOrigen');
 	// body...
 	var puntoOrigen = {
@@ -53,6 +60,10 @@ function ecobiciMasCercanaOrigen() {
 	markadorEcoBiciInicio.setMap(map);
 	markadorEcoBiciFin.setPosition(new google.maps.LatLng(ebDestino.lat, ebDestino.lng));
 	markadorEcoBiciFin.setMap(map);
+
+	activeRoute.push(calcularRuta(markadorOrigen.position,markadorEcoBiciInicio.position,"car"));
+	activeRoute.push(calcularRuta(markadorEcoBiciInicio.position,markadorEcoBiciFin.position,"bicycle"));
+	activeRoute.push(calcularRuta(markadorEcoBiciFin.position,markadorDestino.position,"walk"));
 
 
 }
@@ -103,4 +114,42 @@ function obtenPoligonosEcoPark() {
 		result.push(poligonosEcoPark.features[i].geometry.coordinates[0][0]);
 	}
 	return result;
+}
+
+
+
+
+function calcularRuta(start,end,type) {
+	console.log('Calculando ruta...')
+	var datos=tipoTransporte[type];
+	/*var waypts = [];
+	waypts.push({
+		location: new google.maps.LatLng(19.406048, -99.168616),
+		stopover: true
+	});*/
+	console.log(datos);
+
+	var request = {
+		origin: start,
+		destination: end,
+		//draggable: true,
+		//waypoints: waypts,
+		travelMode: google.maps.DirectionsTravelMode[datos.mode]
+	};
+
+	var rendererOptions2 = {
+		draggable: true,
+		suppressMarkers: true,
+		polylineOptions: { strokeColor: datos.color } 
+	};
+
+	var directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions2);
+	directionsDisplay2.setMap(map);
+	//directionsDisplay2.setOptions({ preserveViewport: true });
+	directionsService.route(request, function(result, status) {
+		if (status == google.maps.DirectionsStatus.OK) {
+			directionsDisplay2.setDirections(result);
+		}
+	});
+	return directionsDisplay2;
 }

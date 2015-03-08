@@ -1,5 +1,5 @@
 var resultadoOrigen, resultadosDestino, resultadosGeneral;
-
+var activeRoute=[];
 
 var markadorOrigen = new google.maps.Marker({
 	map: null,
@@ -54,6 +54,15 @@ function dibujaInfoboxBotones(location) {
 					resuelveDeocder(results, status, markadorOrigen.getPosition(), 'origen')
 				});
 			}
+			console.log(activeRoute);
+			if(activeRoute.length>0){
+
+				for(var i=0;i<activeRoute.length;i++){
+					activeRoute[i].setMap(null);
+				}
+				activeRoute=[];
+			}
+
 			geocoder.geocode({
 				'latLng': location
 			}, function(results, status) {
@@ -61,6 +70,7 @@ function dibujaInfoboxBotones(location) {
 			});
 			infowindowOrigenDestino.close();
 
+			
 			decideRecomendacion();
 			/*obtenPoligonos();*/
 
