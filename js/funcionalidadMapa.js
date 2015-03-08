@@ -31,6 +31,11 @@ function dibujaInfoboxBotones(location) {
 			markadorOrigen.setPosition(location);
 			markadorOrigen.setMap(map);
 			infowindowOrigenDestino.close();
+			geocoder.geocode({
+				'latLng': location
+			}, function(results, status) {
+				resuelveDeocder(results, status, location, 'origen')
+			});
 
 		};
 		document.getElementById('destinoEnMapa').onclick = function(e) {
@@ -41,34 +46,61 @@ function dibujaInfoboxBotones(location) {
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(successGeoLoc, errorGeoLoc);
 				} else {
-					alert('geolocation not supported');
+					//alert('geolocation not supported');
 				}
-
-
+				geocoder.geocode({
+					'latLng': markadorOrigen.getPosition()
+				}, function(results, status) {
+					resuelveDeocder(results, status, markadorOrigen.getPosition(), 'origen')
+				});
 			}
+			geocoder.geocode({
+				'latLng': location
+			}, function(results, status) {
+				resuelveDeocder(results, status, location, 'destino')
+			});
 			infowindowOrigenDestino.close();
 
-			/*decideRecomendacion();
-			obtenPoligonos();*/
+			decideRecomendacion();
+			/*obtenPoligonos();*/
 
 		};
 
 	}
 	// Fin Infobox
+function resuelveDeocder(results, status, latlng, tipo) {
+	console.log(tipo);
+	if (status == google.maps.GeocoderStatus.OK) {
+		if (results[1]) {
+			if (tipo == 'origen') {
+				//alert(results[1].formatted_address);
+				document.getElementById('inputOrigen').value = results[1].formatted_address;
+			} else {
+				//alert(results[1].formatted_address + '1');
+				document.getElementById('inputDestino').value = results[1].formatted_address;
+
+			}
+
+		} else {
+			alert('No results found');
+		}
+	} else {
+		alert('Geocoder failed due to: ' + status);
+	}
+}
 
 function successGeoLoc(position) {
-	alert(position.coords.latitude + ', ' + position.coords.longitude);
+	//alert(position.coords.latitude + ', ' + position.coords.longitude);
 	markadorOrigen.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
 }
 
 function errorGeoLoc(msg) {
 	console.log(msg);
-	alert('error: ' + 'Geo-localización denegada');
+	//alert('error: ' + 'Geo-localización denegada');
 
 }
 
 var ecoBiciVisible = false;
-
 function toggleEcoBici() {
 	console.log('toggleEcoBici');
 	ecoBiciVisible = !ecoBiciVisible;
@@ -84,10 +116,9 @@ function toggleEcoBici() {
 }
 
 var ecoParkVisible = false;
-
 function toggleParkimetros() {
-	console.log('toggleEcoBici');
-	ecoBiciVisible = !ecoBiciVisible;
+	console.log('toggleParkimetros');
+	ecoParkVisible = !ecoParkVisible;
 	if (ecoBiciVisible) {
 		ecoParkPoligonosKML.setMap(map);
 	} else {

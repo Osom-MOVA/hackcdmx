@@ -4,9 +4,26 @@ var circle = {
 	path: google.maps.SymbolPath.CIRCLE,
 	fillColor: 'green',
 	fillOpacity: 1,
-	scale: 6,
+	scale: 2,
 	strokeColor: 'white',
 	strokeWeight: 1
+};
+var circleRed = {
+	path: google.maps.SymbolPath.CIRCLE,
+	fillColor: 'red',
+	fillOpacity: 1,
+	scale: 3,
+	strokeColor: 'white',
+	strokeWeight: 1
+};
+
+var circleBlue = {
+	path: google.maps.SymbolPath.CIRCLE,
+	fillColor: 'blue',
+	fillOpacity: 1,
+	scale: 5,
+	strokeColor: 'white',
+	strokeWeight: 2
 };
 
 

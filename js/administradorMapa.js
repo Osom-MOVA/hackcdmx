@@ -26,6 +26,9 @@ function initialize() {
 		dibujaInfoboxBotones(e.latLng);
 	});
 
+	toggleEcoBici();
+	toggleParkimetros();
+
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
