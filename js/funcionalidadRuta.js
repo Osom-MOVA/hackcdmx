@@ -90,6 +90,7 @@ function decideRecomendacion() {
 }
 
 function obtenRutaMulti() {
+	wipeRoute();
 	activeRoute.push(calcularRuta(markadorOrigen.position, markadorEcoBiciInicio.position, "car"));
 	activeRoute.push(calcularRuta(markadorEcoBiciInicio.position, markadorEcoBiciFin.position, "bicycle"));
 	activeRoute.push(calcularRuta(markadorEcoBiciFin.position, markadorDestino.position, "walk"));
@@ -209,4 +210,14 @@ function calcularRuta(start, end, type) {
 		}
 	});
 	return directionsDisplay2;
+}
+
+function wipeRoute() {
+	if (activeRoute.length > 0) {
+
+		for (var i = 0; i < activeRoute.length; i++) {
+			activeRoute[i].setMap(null);
+		}
+		activeRoute = [];
+	}
 }

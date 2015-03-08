@@ -25,7 +25,13 @@ var circleBlue = {
 	strokeColor: 'white',
 	strokeWeight: 2
 };
-
+var pinEcobicis = new google.maps.MarkerImage(
+	"img/x_BICI%20ICONO.png",
+	null, /* size is determined at runtime */
+	null, /* origin is 0,0 */
+	null, /* anchor is bottom center of the scaled image */
+	new google.maps.Size(20, 20)
+);
 
 // Obtiene la latitud y longitud de location en los objetos de ecobici ya que vienen en string "lat,lng"
 var ecobiciPoints = [];
