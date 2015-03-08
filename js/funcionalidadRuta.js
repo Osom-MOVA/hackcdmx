@@ -27,6 +27,7 @@ var tipoTransporte = {
 		icono: "",
 		mode: "DRIVING"
 	}
+};
 
 var pinIconOrigenBici = new google.maps.MarkerImage(
 	"img/x_BICI%20ON.png",
@@ -76,23 +77,37 @@ function decideRecomendacion() {
 
 	//TODO falta distancia mayor a normal , proyección
 
+	
+	
+	if(ecobicisEnCirculo.length==0){
+		obtenRutaSimple();
+	}
+	else{
 	var candidatos = determinaFueraPoligonos(obtenPoligonosEcoPark(), ecobicisEnCirculo);
+	if(candidatos.length==0){
+	//TODO si candidatos es vacio obliga a punto más cercano auqneu este en parkímetro
+			candidatos=ecobicisEnCirculo;
+
+		}
+			ecobiciMasCercanaOrigen(candidatos);
+			obtenRutaMulti();
+	}
 	
 
-	//TODO si candidatos es vacio obliga a punto más cercano auqneu este en parkímetro
-
-	ecobiciMasCercanaOrigena();
-
-
-	obtenRutaMulti();
+	
 
 	hayRutaActualmente = true; //Para saber que hay una ruta y poder actualizar sin preguntar por todos los puntos
 }
 
 function obtenRutaMulti() {
+	wipeRoute();
 	activeRoute.push(calcularRuta(markadorOrigen.position, markadorEcoBiciInicio.position, "car"));
 	activeRoute.push(calcularRuta(markadorEcoBiciInicio.position, markadorEcoBiciFin.position, "bicycle"));
 	activeRoute.push(calcularRuta(markadorEcoBiciFin.position, markadorDestino.position, "walk"));
+}
+
+function obtenRutaSimple(){
+	activeRoute.push(calcularRuta(markadorOrigen.position, markadorDestino.position, "car"));
 }
 
 function ecobiciMasCercanaOrigena() {
@@ -226,6 +241,7 @@ function calcularRuta(start, end, type) {
 	});
 	return directionsDisplay2;
 }
+
 //-----------------------------------active route es el que borra  las rutas		
 function wipeRoute(){	
 			if (activeRoute.length > 0) {
