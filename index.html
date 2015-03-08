@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 </head>
 <body>
+	
 	<div class="container-fluid controles">
 		<div class="row">
 			<div class="col-sm-10 columns">
@@ -27,10 +28,21 @@
 
 					<div class="row">
 						<div class="col-sm-5 five columns">
-							Voy de <input class="inputRuta"  type="origen" id="inputOrigen" class="direccion">
+							<div class="col-xs-3">
+								Voy de 
+							</div>
+							<div class="col-xs-9">
+								<input class="inputRuta"  type="origen" id="inputOrigen" class="direccion">
+							</div>
+							
 						</div>
 						<div class=" col-sm-5 col-xs-11 five columns">
-							a  <input  class="inputRuta" type="destino" id="inputDestino" class="direccion"> 
+							<div class="col-xs-3">
+								a 
+							</div>
+							<div class="col-xs-9">
+								<input  class="inputRuta" type="destino" id="inputDestino" class="direccion"> 
+							</div>
 						</div>
 						<div class="col-sm-2 col-xs-1 two columns">
 							<button>SW</button>
@@ -40,24 +52,25 @@
 					
 				</div>
 			</div>
-			<div class="col-sm-2 columns">
+			<div class="col-sm-2 col-sm-offset-0 col-xs-6 col-xs-offset-1 columns">
+
 				<div id="menu-transporte">
 					<div class="row">
 						<div class="contenedor-menu">
 							
-							<div class="columns col-sm-2">
+							<div class="columns col-xs-2">
 								<img class="img-responsive" src="img/x_BICI%20ON.png" alt="">
 							</div>
-							<div class="columns col-sm-2">
+							<div class="columns col-xs-2">
 								<img class="img-responsive" src="img/x_PEATON%20ON.png" alt="">
 							</div>
-							<div class="columns col-sm-2">
+							<div class="columns col-xs-2">
 								<img class="img-responsive" src="img/x_COCHE%20ON.png" alt="">
 							</div>
-							<div class="columns col-sm-2">
+							<div class="columns col-xs-2">
 								<img class="img-responsive" src="img/x_METRO%20ON.png" alt="">
 							</div>
-							<div class="columns col-sm-2">
+							<div class="columns col-xs-2">
 								<img class="img-responsive" src="img/x_BUS%20ON.png" alt="">
 							</div>
 						</div>
@@ -77,6 +90,10 @@
 				<li><img class="img-responsive" src="img/x_BUS VISTA OFF.png" alt="bus"></li>
 
 			</ul>
+
+		</div>
+		<div class="logo">
+			<img src="img/X_LOGO%20MOVA.png" alt="">
 		</div>
 	</div>
 	<div id="map-canvas"></div>
