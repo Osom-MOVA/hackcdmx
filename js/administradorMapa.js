@@ -6,6 +6,8 @@ var rendererOptions = {
 	// draggable: true
 };
 var ecoparks = new google.maps.Data();
+var estacionamientos = new google.maps.Data();
+
 //-----------------------Se inicializa el mapa de google con sus parametros
 function initialize() {
 	geocoder = new google.maps.Geocoder();
@@ -27,12 +29,13 @@ function initialize() {
 		dibujaInfoboxBotones(e.latLng);
 	});
 
-	
+
+	/*Cargar ecoparks*/
 	ecoparks.loadGeoJson('datos/ecopark.json');
 
 	//toggleParkimetros();
 	ecoparks.setStyle({
-		//icon: '//example.com/path/to/image.png',
+		icon: '//example.com/path/to/image.png',
 		fillColor: '#B0B8DB',
 		fillOpacity: 0.35,
 		strokeColor: '#DCE0F2',
@@ -43,8 +46,31 @@ function initialize() {
 		console.log(e.latLng);
 		dibujaInfoboxBotones(e.latLng);
 	});
+	/*Cargar estacionamientos*/
+	estacionamientos.loadGeoJson('datos/estacionamientospublicos.geojson');
 
-	
+	//toggleParkimetros();
+	estacionamientos.setStyle({
+		icon: {
+			path: google.maps.SymbolPath.CIRCLE,
+			fillColor: 'pink',
+			fillOpacity: 1,
+			scale: 4,
+			strokeColor: 'white',
+			strokeWeight: 1
+				// fillOpacity: 2 / feature.getProperty('mag'),
+				// while an exponent would technically be correct, quadratic looks nicer
+				//scale: Math.pow(feature.getProperty('mag'), 2)
+		}
+
+	});
+
+	/*	ecoparks.addListener('click', function(e) {
+			console.log(e.latLng);
+			dibujaInfoboxBotones(e.latLng);
+		});*/
+
+
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -59,8 +85,10 @@ function muestraElemento(elem, categoria, c) {
 		toggleEcoBici();
 	} else if (categoria === 'ecopark') {
 		toggleParkimetros();
-	} else if( categoria==='metro'){
+	} else if (categoria === 'metro') {
 		toggleMetro();
+	} else if (categoria === 'estacionamiento') {
+		toggleEstacionamientos();
 	}
 
 }

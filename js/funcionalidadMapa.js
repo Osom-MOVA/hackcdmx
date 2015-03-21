@@ -181,6 +181,18 @@ function toggleParkimetros() {
 	}
 
 }
+var estacionamientoVisible = false;
+
+function toggleEstacionamientos() {
+	console.log('toggleEstacionamientos');
+	estacionamientoVisible = !estacionamientoVisible;
+	if (estacionamientoVisible) {
+		estacionamientos.setMap(map);
+	} else {
+		estacionamientos.setMap(null);
+	}
+
+}
 
 function colocarPinEnDireccion(elem, tipoSolicitud) {
 	if (event.keyCode == 13) {
